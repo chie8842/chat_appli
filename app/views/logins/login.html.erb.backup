@@ -1,0 +1,21 @@
+<h1>ログイン画面</h1>
+
+<!-- フラッシュ変数のメッセージを表示（ログインエラー時のみ） -->
+<p><font color=red><%= flash[:alert] %></font></p>
+<%= form_tag login_path do %>
+<table id="login_form">
+  <tr>
+    <td><%= label_tag :name, 'ユーザー名' %></td>
+    <td><%= text_field_tag :name, params[:name] %></td>
+  </tr>
+
+  <tr>
+    <td><%= label_tag :pass, 'パスワード' %></td>
+    <td><%= password_field_tag :pass, params[:pass] %></td>
+  </tr>
+
+  <tr>
+    <td><%= submit_tag "ログイン" %></td>
+  </tr>
+</table>
+<% end %>

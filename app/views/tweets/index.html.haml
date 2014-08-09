@@ -1,0 +1,25 @@
+- model_class = Tweet
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:userId)
+      %th= model_class.human_attribute_name(:userName)
+      %th= model_class.human_attribute_name(:tweet)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @tweets.each do |tweet|
+      %tr
+        %td= link_to tweet.id, tweet_path(tweet)
+        %td= tweet.userId
+        %td= tweet.userName
+        %td= tweet.tweet
+        %td=l tweet.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_tweet_path(tweet), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), tweet_path(tweet), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_tweet_path, :class => 'btn btn-primary'

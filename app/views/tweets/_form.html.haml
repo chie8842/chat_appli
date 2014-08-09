@@ -1,0 +1,16 @@
+= form_for @tweet, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :userId, :class => 'control-label'
+    .controls
+      = f.text_field :userId, :class => 'text_field'
+  .control-group
+    = f.label :userName, :class => 'control-label'
+    .controls
+      = f.text_field :userName, :class => 'text_field'
+  .control-group
+    = f.label :tweet, :class => 'control-label'
+    .controls
+      = f.text_field :tweet, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), tweets_path, :class => 'btn'
