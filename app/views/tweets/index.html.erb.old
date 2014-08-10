@@ -1,0 +1,68 @@
+<h1>Listing tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Tweet</th>
+      <th>Time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.userName %></td>
+        <td><%= tweet.tweet %></td>
+        <td><%= tweet.created_at %></td>
+        <td><%= link_to_if(tweet.userId.to_i == session[:user_id].to_i, '削除', tweet, method: :delete, data: { confirm: 'Are you sure?' }){} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= form_for(@tweet) do |f| %>
+  <% if @tweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+
+      <ul>
+      <% @tweet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tweet %><br>
+    <%= f.text_area :tweet %>
+  </div>
+  <div class="actions">
+    <%= f.submit '送信' , data: { disable_with: '送信中' } %>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ハッシュタグ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= link_to 'すべてのタグ', tweet_path(0), method: :get %></td>
+    </tr>
+    <% @hashtags.each do |hashtag| %>
+      <tr>
+        <td><%= link_to hashtag.name, tweet_path(hashtag), method: :get %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'ログアウト', login_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
