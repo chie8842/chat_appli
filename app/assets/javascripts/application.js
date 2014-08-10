@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require docs.min
 //= require bootstrap.min
 //= require location
-//= require docs.min
 
